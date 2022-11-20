@@ -7,8 +7,27 @@ type MessagePropsType = {
     message: string
 }
 const Message = (props: MessagePropsType) => {
+
+    let newMes =  React.createRef()
+
+    const  addMes = ()=>{
+        const text = newMes.current.value
+    }
+
+
     return (
-        <div className={s.dialog}>{props.message}</div>
+        <div className={s.dialog}>
+            <div>
+                {props.message}
+            </div>
+            <div>
+                <textarea ref={newMes}></textarea>
+            </div>
+                <div>
+                    <button   onClick={addMes}>Add message</button>
+                </div>
+        </div>
+
     )
 }
 
