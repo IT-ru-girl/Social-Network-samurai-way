@@ -24,7 +24,7 @@ function App() {
                     <div className="app-wrapper-content">
                         <Route path="/dialogs" render={() => <Dialogs dialogs={state.dialogsPage.dialogs} messages={state.dialogsPage.messages} addPostCallback={addPost}/>}/>
 
-                        <Route path="/profile/" render={() => <Profile posts={state.profilePage.posts}   />}/>
+                        <Route path="/profile/" render={() => <Profile posts={state.profilePage.posts}  addPostCallback={addPost}  />}/>
 
                     <Route path="/news" component={News}/>
                     <Route path="/music" component={Music}/>
