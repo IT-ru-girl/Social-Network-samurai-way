@@ -5,13 +5,14 @@ import s from './../Dialogs.module.css'
 
 type MessagePropsType = {
     message: string
+    addPostCallback: (postMessage: string)=> void
 }
 const Message = (props: MessagePropsType) => {
 
-    let newMes =  React.createRef()
+    let newMes  =  React.createRef<HTMLTextAreaElement>()
 
     const  addMes = ()=>{
-        const text = newMes.current.value
+        const text = newMes.current?.value
     }
 
 

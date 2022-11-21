@@ -3,9 +3,13 @@ import s from './Dialogs.module.css'
 
 import DialogItem from './DialogItem/DialogsItem';
 import Message from './Message/Message';
-import {DialogsAndMesType} from '../../redux/state';
+import {ArrayDialogsType2, ArrayMessagesType2, } from '../../redux/state';
 
-
+export type DialogsAndMesType = {
+    dialogs: Array<ArrayDialogsType2>
+    messages: Array<ArrayMessagesType2>
+    addPostCallback: (postMessage: string)=> void
+}
 const Dialogs = (props: DialogsAndMesType) => {
 
     let dialogsElements = props.dialogs.map(dialog => {
@@ -16,7 +20,7 @@ const Dialogs = (props: DialogsAndMesType) => {
 
     let messagesElements = props.messages.map(message => {
         return (
-            <Message message={message.message}/>
+            <Message message={message.message} addPostCallback={props.addPostCallback}/>
         )
     })
     return (

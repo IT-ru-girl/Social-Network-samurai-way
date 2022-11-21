@@ -23,6 +23,7 @@ export type PostsType = {
 export type DialogsAndMesType = {
     dialogs: Array<ArrayDialogsType2>
     messages: Array<ArrayMessagesType2>
+
 }
 
 export type DataPropsType = {
@@ -31,9 +32,11 @@ export type DataPropsType = {
     sidebar: SidebarType
 }
 
-export type StateType = {
-    state: DataPropsType
-}
+// export type StateType = {
+//     state: DataPropsType
+// }
+
+
 let state: (DataPropsType) = {
     profilePage: {
         posts: [
@@ -63,5 +66,14 @@ let state: (DataPropsType) = {
     },
     sidebar: []
 
+}
+
+ export let addPost = (postMessage: string) =>{
+    const newPost: ArrayPostsType2 ={
+        id:5,
+        message: postMessage,
+        likesCount: 0
+    }
+    state.profilePage.posts.push(newPost);
 }
 export default state;

@@ -12,10 +12,10 @@ const MyPosts = (props: PostsType) => {
             <Post message={post.message} likeCount={post.likesCount}/>
         )
     })
-let newPostElement = React.createRef()
+let newPostElement  = React.createRef<HTMLTextAreaElement>()
 
     const  addPost =()=> {
-        let text = newPostElement.current.value
+        let text = newPostElement.current?.value
     }
 
     return (
