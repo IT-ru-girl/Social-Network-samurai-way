@@ -1,9 +1,12 @@
 import React from 'react';
 import s from './MyPosts.module.css'
 import Post from './Post/Post';
-import {PostsType} from '../../../redux/state';
+import {ArrayPostsType2, } from '../../../redux/state';
 
-
+type PostsType = {
+    posts: Array<ArrayPostsType2>
+    addPostCallback: (postMessage: string)=> void
+}
 const MyPosts = (props: PostsType) => {
 
 
@@ -15,7 +18,10 @@ const MyPosts = (props: PostsType) => {
 let newPostElement  = React.createRef<HTMLTextAreaElement>()
 
     const  addPost =()=> {
-        let text = newPostElement.current?.value
+        if(newPostElement.current){
+            props.addPostCallback(newPostElement.current.value)
+        }
+
     }
 
     return (
@@ -26,7 +32,7 @@ let newPostElement  = React.createRef<HTMLTextAreaElement>()
                     <textarea ref={newPostElement}  ></textarea>
                 </div>
                 <div>
-                    <button  onClick={()=> {}} >Add posts</button>
+                    <button  onClick={addPost} >Add posts</button>
                 </div>
             </div>
             <div>

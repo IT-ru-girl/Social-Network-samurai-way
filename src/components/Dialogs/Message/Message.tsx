@@ -12,7 +12,10 @@ const Message = (props: MessagePropsType) => {
     let newMes  =  React.createRef<HTMLTextAreaElement>()
 
     const  addMes = ()=>{
-        const text = newMes.current?.value
+        if(newMes.current){
+            props.addPostCallback(newMes.current.value )
+        }
+
     }
 
 
