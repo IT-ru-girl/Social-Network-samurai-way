@@ -8,10 +8,17 @@ import {BrowserRouter, Route, } from 'react-router-dom';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
-import state, {addPost, } from './redux/state';
+import  { StoreType,} from './redux/state';
 
 
-function App() {
+
+
+type AppType = {
+    store: StoreType
+}
+function App(props: AppType) {
+
+    const state= props.store.getState();
 
 
     return (
@@ -22,9 +29,11 @@ function App() {
                 {/*<Route path="/dialogs" component={Dialogs}/>*/}
                 {/*<Route path="/profile" component={Profile}/>*/}
                     <div className="app-wrapper-content">
-                        <Route path="/dialogs" render={() => <Dialogs dialogs={state.dialogsPage.dialogs} messages={state.dialogsPage.messages} addPostCallback={addPost}/>}/>
+                        <Route path="/dialogs" render={() => <Dialogs  posts={state.profilePage.posts} dialogs={state.dialogsPage.dialogs} messages={state.dialogsPage.messages} addPostCallback={props.store.addPost.bind(props.store)}/>}/>
 
-                        <Route path="/profile/" render={() => <Profile posts={state.profilePage.posts}  addPostCallback={addPost}  />}/>
+                        <Route path="/profile/" render={() => <Profile newPostText={state.profilePage.newPostText} posts={state.profilePage.posts}  addPostCallback={props.store.addPost.bind(props.store)}
+
+                                                                       onPostChange={props.store.onPostChange.bind(props.store)} />}/>
 
                     <Route path="/news" component={News}/>
                     <Route path="/music" component={Music}/>
