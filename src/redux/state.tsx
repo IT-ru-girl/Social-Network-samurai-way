@@ -37,8 +37,8 @@ export type DataPropsType = {
 
 export type StoreType = {
     _state: DataPropsType,
-    onPostChange: (newPostText: string)=> void,
-    addPost: (postMessage: string) => void,
+    // onPostChange: (newPostText: string)=> void,
+    // addPost: (postMessage: string) => void,
     _rerenderEntireTree :() => void,
     subscribe : (observer: () => void)=> void,
     getState: ()=> DataPropsType
