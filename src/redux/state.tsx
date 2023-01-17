@@ -42,6 +42,17 @@ export type StoreType = {
     _rerenderEntireTree :() => void,
     subscribe : (observer: () => void)=> void,
     getState: ()=> DataPropsType
+    dispatch: ( action: AddPostActionType | ChangeNewTextActionType ) => void
+}
+
+ export type AddPostActionType ={
+    type: 'ADD-POST'
+    postMessage: string
+}
+
+ export type ChangeNewTextActionType ={
+    type: 'UPDATE-NEW-POST-TEXT'
+    newText: string
 }
 
 
@@ -77,30 +88,47 @@ const store: StoreType = {
         sidebar: []
 
     },
-    addPost(postMessage: string) {
-
-        const newPost: ArrayPostsType2 = {
-            id: 5,
-            message:this._state.profilePage.newPostText=postMessage,
-            likesCount: 0
-        }
-        this._state.profilePage.posts.push(newPost);
-        this._state.profilePage.newPostText = ''
-        this._rerenderEntireTree();
-
-    },
+    // addPost(postMessage: string) {
+    //
+    //     const newPost: ArrayPostsType2 = {
+    //         id: 5,
+    //         message:this._state.profilePage.newPostText=postMessage,
+    //         likesCount: 0
+    //     }
+    //     this._state.profilePage.posts.push(newPost);
+    //     this._state.profilePage.newPostText = ''
+    //     this._rerenderEntireTree();
+    //
+    // },
     _rerenderEntireTree()  {
         console.log('state')
     },
      subscribe(observer) {
         this._rerenderEntireTree = observer;
     },
-    onPostChange(newText) {
-        this._state.profilePage.newPostText = newText
-        this._rerenderEntireTree();
-    },
+    // onPostChange(newText) {
+    //     this._state.profilePage.newPostText = newText
+    //     this._rerenderEntireTree();
+    // },
     getState(){
       return  this._state
+    },
+    dispatch(action){
+        if(action.type === 'ADD-POST'){
+            const newPost: ArrayPostsType2 = {
+                id: 5,
+                message:action.postMessage,
+                //this._state.profilePage.newPostText,
+                likesCount: 0
+            }
+            this._state.profilePage.posts.push(newPost);
+            this._state.profilePage.newPostText = ''
+            this._rerenderEntireTree();
+        }
+         else if (action.type ==='UPDATE-NEW-POST-TEXT'){
+            this._state.profilePage.newPostText=action.newText
+            this._rerenderEntireTree();
+        }
     }
 
 }
