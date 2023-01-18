@@ -3,13 +3,14 @@ import s from './Dialogs.module.css'
 
 import DialogItem from './DialogItem/DialogsItem';
 import Message from './Message/Message';
-import {ArrayDialogsType2, ArrayMessagesType2, ArrayPostsType2,} from '../../redux/state';
+import {ActionType, ArrayDialogsType2, ArrayMessagesType2, ArrayPostsType2,} from '../../redux/state';
 
 export type DialogsAndMesType = {
     dialogs: Array<ArrayDialogsType2>
     messages: Array<ArrayMessagesType2>
-    addPostCallback: (postMessage: string)=> void
     posts: Array<ArrayPostsType2>
+    // addMessage: (newDialogsMessage: string)=> void
+    dispatch: (action: ActionType) => void
 
 }
 const Dialogs = (props: DialogsAndMesType) => {
@@ -20,11 +21,11 @@ const Dialogs = (props: DialogsAndMesType) => {
         )
     })
 
-    let messagesElements = props.messages.map(message => {
-        return (
-            <Message  posts={props.posts} message={message.message} addPostCallback={props.addPostCallback}/>
-        )
-    })
+    // let messagesElements = props.messages.map(message => {
+    //     return (
+
+    //     )
+    // })
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
@@ -54,7 +55,11 @@ const Dialogs = (props: DialogsAndMesType) => {
                 {/*</div>*/}
             </div>
             <div className={s.messages}>
-                {messagesElements}
+                <Message dispatch={props.dispatch}
+                         messages={props.messages}
+                         // message={props.messages.message}
+
+                />
                 {/*<Message message={messagesData[1].message}/>*/}
                 {/*<Message message={messagesData[2].message}/>*/}
                 {/*<Message message={messagesData[3].message}/>*/}

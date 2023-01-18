@@ -39,21 +39,50 @@ export type StoreType = {
     _state: DataPropsType,
     // onPostChange: (newPostText: string)=> void,
     // addPost: (postMessage: string) => void,
-    _rerenderEntireTree :() => void,
-    subscribe : (observer: () => void)=> void,
-    getState: ()=> DataPropsType
-    dispatch: ( action: AddPostActionType | ChangeNewTextActionType ) => void
+    _rerenderEntireTree: () => void,
+    subscribe: (observer: () => void) => void,
+    getState: () => DataPropsType
+    dispatch: (action: ActionType) => void
+    // addMessage: (newDialogsMessage: string)=> void
 }
 
- export type AddPostActionType ={
-    type: 'ADD-POST'
-    postMessage: string
+
+ export type  ActionType = AddPostActionType | ChangeNewTextActionType | AddMessageActionTYpe
+ type AddPostActionType = ReturnType<typeof addPostAC>
+//      {
+//     type: 'ADD-POST'
+//     postMessage: string
+// }
+
+ type ChangeNewTextActionType = ReturnType<typeof postChangeAC>
+//  {
+//     type: 'UPDATE-NEW-POST-TEXT'
+//     newText: string
+// }
+
+type AddMessageActionTYpe = ReturnType<typeof addMesAC >
+
+export const addPostAC = (postMessage: string) => {
+    return {
+        type: 'ADD-POST',
+        postMessage: postMessage
+    } as const
 }
 
- export type ChangeNewTextActionType ={
-    type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
+export const postChangeAC = (text: string) => {
+    return {
+        type: 'UPDATE-NEW-POST-TEXT',
+        newText: text
+    } as const
 }
+
+export const addMesAC = (newDialogsMessage:string) => {
+    return {
+        type: 'ADD-MESSAGE',
+        newDialogsMessage: newDialogsMessage
+    } as const
+}
+
 
 
 const store: StoreType = {
@@ -92,7 +121,7 @@ const store: StoreType = {
     //
     //     const newPost: ArrayPostsType2 = {
     //         id: 5,
-    //         message:this._state.profilePage.newPostText=postMessage,
+    //         message: this._state.profilePage.newPostText = postMessage,
     //         likesCount: 0
     //     }
     //     this._state.profilePage.posts.push(newPost);
@@ -100,41 +129,56 @@ const store: StoreType = {
     //     this._rerenderEntireTree();
     //
     // },
-    _rerenderEntireTree()  {
+    // addMessage(newDialogsMessage: string) {
+    //     const newMes: ArrayMessagesType2 = {
+    //         id: 6,
+    //         message:  newDialogsMessage
+    //     }
+    //     this._state.dialogsPage.messages.push(newMes);
+    //     // this._state.dialogsPage.messages = ''
+    //     this._rerenderEntireTree();
+    //
+    // },
+    _rerenderEntireTree() {
         console.log('state')
     },
-     subscribe(observer) {
+    subscribe(observer) {
         this._rerenderEntireTree = observer;
     },
     // onPostChange(newText) {
     //     this._state.profilePage.newPostText = newText
     //     this._rerenderEntireTree();
     // },
-    getState(){
-      return  this._state
+    getState() {
+        return this._state
     },
-    dispatch(action){
-        if(action.type === 'ADD-POST'){
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
             const newPost: ArrayPostsType2 = {
                 id: 5,
-                message:action.postMessage,
+                message: this._state.profilePage.newPostText = action.postMessage,
                 //this._state.profilePage.newPostText,
                 likesCount: 0
             }
             this._state.profilePage.posts.push(newPost);
             this._state.profilePage.newPostText = ''
             this._rerenderEntireTree();
-        }
-         else if (action.type ==='UPDATE-NEW-POST-TEXT'){
-            this._state.profilePage.newPostText=action.newText
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newText
+            this._rerenderEntireTree();
+        } else if (action.type === 'ADD-MESSAGE') {
+
+            const newMes: ArrayMessagesType2 = {
+                id: 6,
+                message: action.newDialogsMessage
+            }
+            this._state.dialogsPage.messages.push(newMes);
+            // this._state.dialogsPage.messages = ''
             this._rerenderEntireTree();
         }
     }
 
 }
-
-
-
 
 
 export default store;

@@ -1,16 +1,29 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css'
 import Post from './Post/Post';
-import {AddPostActionType, ArrayPostsType2, ChangeNewTextActionType,} from '../../../redux/state';
+import {
+    ActionType,
+    addPostAC,
+
+    ArrayPostsType2,
+
+    postChangeAC,
+} from '../../../redux/state';
 
 type PostsType = {
     posts: Array<ArrayPostsType2>
-    newPostText: string
+    postMessage: string
     // addPostCallback: (postMessage: string)=> void
     // onPostChange: (newPostText: string)=> void
-    dispatch: (action: AddPostActionType | ChangeNewTextActionType) => void
+    dispatch: (action: ActionType) => void
 }
+
+
+
+
 const MyPosts = (props: PostsType) => {
+
+
 
 
     let postsElements = props.posts.map(post => {
@@ -22,18 +35,20 @@ const MyPosts = (props: PostsType) => {
 
     const  addPost =()=> {
         // props.addPostCallback(props.newPostText)
-        props.dispatch({type: 'ADD-POST', postMessage: props.newPostText })
+        // props.dispatch({type: 'ADD-POST', postMessage: props.newPostText })
+        props.dispatch(addPostAC(props.postMessage))
 
 
 
     }
     const onPostChange =(event: ChangeEvent<HTMLTextAreaElement>)=>{
-      const newPostText = event.currentTarget.value
+      const text = event.currentTarget.value
         // props.onPostChange(newPostText)
-        props.dispatch({
-            type: 'UPDATE-NEW-POST-TEXT',
-            newText: newPostText
-        })
+        // props.dispatch({
+        //     type: 'UPDATE-NEW-POST-TEXT',
+        //     newText: text
+        // })
+        props.dispatch(postChangeAC(text))
     }
 
     return (
@@ -41,7 +56,7 @@ const MyPosts = (props: PostsType) => {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea value={props.newPostText} onChange={onPostChange}  ></textarea>
+                    <textarea value={props.postMessage} onChange={onPostChange}  ></textarea>
                 </div>
                 <div>
                     <button  onClick={addPost} >Add posts</button>

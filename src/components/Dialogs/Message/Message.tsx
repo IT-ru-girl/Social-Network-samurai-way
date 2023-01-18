@@ -1,21 +1,25 @@
 import React from 'react';
 import s from './../Dialogs.module.css'
-import {ArrayPostsType2} from '../../../redux/state';
+import {ActionType, addMesAC,  ArrayMessagesType2, ArrayPostsType2} from '../../../redux/state';
 
 
 
 type MessagePropsType = {
-    message: string
-    posts: Array<ArrayPostsType2>
-    addPostCallback: (postMessage: string)=> void
+    // message: string
+    messages: Array<ArrayMessagesType2>
+    // posts: Array<ArrayPostsType2>
+    dispatch: (action: ActionType) => void
+    // addMessage: (newDialogsMessage: string)=> void
 }
 const Message = (props: MessagePropsType) => {
 
     let newMes  =  React.createRef<HTMLTextAreaElement>()
 
     const  addMes = ()=>{
+
         if(newMes.current){
-            props.addPostCallback(newMes.current.value )
+            console.log(newMes.current.value)
+            props.dispatch(addMesAC(newMes.current.value))
         }
 
     }
@@ -24,9 +28,9 @@ const Message = (props: MessagePropsType) => {
     return (
         <div className={s.dialog}>
             <div>
-                {props.message}
+                {/*{props.message}*/}
                 <hr/>
-                {props.posts.map(p=> <div key={p.id}><b>{p.message}</b></div>)}
+                {props.messages.map(p=> <div key={p.id}><b>{p.message}</b></div>)}
             </div>
             <div>
                 <textarea ref={newMes}></textarea>
