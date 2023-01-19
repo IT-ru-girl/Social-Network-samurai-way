@@ -11,7 +11,7 @@ export type DialogsAndMesType = {
     posts: Array<ArrayPostsType2>
     // addMessage: (newDialogsMessage: string)=> void
     dispatch: (action: ActionType) => void
-
+    newMessageBody:string
 }
 const Dialogs = (props: DialogsAndMesType) => {
 
@@ -30,42 +30,13 @@ const Dialogs = (props: DialogsAndMesType) => {
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
                 {dialogsElements}
-                {/*<DialogItem name="Anna" id="2"/>*/}
-                {/*<DialogItem name="Masha" id="3"/>*/}
-                {/*<DialogItem name="Kate" id="3"/>*/}
-                {/*<DialogItem name="Danya" id="4"/>*/}
-                {/*<DialogItem name="Andrey" id="5"/>*/}
-                {/*<div className={s.dialog + ' ' + s.active}>*/}
-                {/*    <NavLink to={'/dialogs/1'+ props.id}>{props.name}</NavLink>*/}
-                {/*</div>*/}
-                {/*<div className={s.dialog}>*/}
-                {/*    <NavLink to='/dialogs/2' >Anna</NavLink>*/}
-                {/*</div>*/}
-                {/*<div className={s.dialog}>*/}
-                {/*    <NavLink to='/dialogs/3' >Masha</NavLink>*/}
-                {/*</div>*/}
-                {/*<div className={s.dialog}>*/}
-                {/*    <NavLink to='/dialogs/4' >Kate</NavLink>*/}
-                {/*</div>*/}
-                {/*<div className={s.dialog}>*/}
-                {/*    <NavLink to='/dialogs/5' >Danya</NavLink>*/}
-                {/*</div>*/}
-                {/*<div className={s.dialog}>*/}
-                {/*    <NavLink to='/dialogs/6' >Andrey</NavLink>*/}
-                {/*</div>*/}
+
             </div>
             <div className={s.messages}>
                 <Message dispatch={props.dispatch}
                          messages={props.messages}
-                         // message={props.messages.message}
-
+                         newMessageBody={props.newMessageBody}
                 />
-                {/*<Message message={messagesData[1].message}/>*/}
-                {/*<Message message={messagesData[2].message}/>*/}
-                {/*<Message message={messagesData[3].message}/>*/}
-                {/*<div className={s.message}>Hi</div>*/}
-                {/*<div className={s.message}>How are u</div>*/}
-                {/*<div className={s.message}>good</div>*/}
             </div>
         </div>
     );

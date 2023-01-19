@@ -33,7 +33,7 @@ function App(props: AppType) {
                            render={() => <Dialogs posts={state.profilePage.posts} dialogs={state.dialogsPage.dialogs}
                                                   messages={state.dialogsPage.messages}
                                                   // addMessage={props.store.addMessage.bind(props.store)
-
+                                                  newMessageBody={state.dialogsPage.newMessageBody}
                                                   dispatch ={props.dispatch}
                            />}/>
 

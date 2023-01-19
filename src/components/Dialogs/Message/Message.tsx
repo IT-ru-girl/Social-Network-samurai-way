@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './../Dialogs.module.css'
-import {ActionType, addMesAC,  ArrayMessagesType2, ArrayPostsType2} from '../../../redux/state';
+import {ActionType, addMesAC, ArrayMessagesType2, ArrayPostsType2, updateMesAC} from '../../../redux/state';
 
 
 
@@ -10,20 +10,22 @@ type MessagePropsType = {
     // posts: Array<ArrayPostsType2>
     dispatch: (action: ActionType) => void
     // addMessage: (newDialogsMessage: string)=> void
+    newMessageBody:string
 }
 const Message = (props: MessagePropsType) => {
 
-    let newMes  =  React.createRef<HTMLTextAreaElement>()
+    let newMes  =  props.newMessageBody
+        // React.createRef<HTMLTextAreaElement>()  с сылками текстэриа работает без ончэйнджа
 
     const  addMes = ()=>{
 
-        if(newMes.current){
-            console.log(newMes.current.value)
-            props.dispatch(addMesAC(newMes.current.value))
-        }
+        props.dispatch(addMesAC(newMes))
 
     }
-
+ const onNewMessageChange=(e:ChangeEvent<HTMLTextAreaElement>)=>{
+    let newMessageValue = e.target.value
+     props.dispatch(updateMesAC(newMessageValue))
+ }
 
     return (
         <div className={s.dialog}>
@@ -33,10 +35,10 @@ const Message = (props: MessagePropsType) => {
                 {props.messages.map(p=> <div key={p.id}><b>{p.message}</b></div>)}
             </div>
             <div>
-                <textarea ref={newMes}></textarea>
+                <textarea onChange={onNewMessageChange} placeholder={'Enter your message'} value={newMes}></textarea>
             </div>
                 <div>
-                    <button   onClick={addMes}>Add message</button>
+                    <button onClick={addMes}>Add message</button>
                 </div>
         </div>
 

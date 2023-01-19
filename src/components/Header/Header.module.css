@@ -3,8 +3,8 @@
 
 .header {
     grid-area: h;
-    background-color: darkgreen;
+    background-color: #3C3F41;
 }
 .header img{
-    width: 50px;
+    width: 80px;
 }

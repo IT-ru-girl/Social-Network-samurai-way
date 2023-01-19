@@ -10,7 +10,7 @@ type MyPostsType={
 const Post = (props:MyPostsType) => {
     return (
         <div className={s.item}>
-            <img src="https://shapka-youtube.ru/wp-content/uploads/2021/02/prikolnaya-avatarka-dlya-patsanov.jpg"
+            <img src="https://amiel.club/uploads/posts/2022-03/1647762891_4-amiel-club-p-kartinki-litsa-cheloveka-4.jpg"
                  alt=""/>
             {props.message }
             <div><span>like </span>{props.likeCount}</div>

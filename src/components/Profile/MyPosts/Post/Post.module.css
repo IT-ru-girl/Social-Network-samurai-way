@@ -1,8 +1,8 @@
 
 .item {
-    color: greenyellow;
+    color: dimgrey;
 }
 .item img{
     width: 50px;
-    border-radius: 50%;
+    border-radius: 100%;
 }

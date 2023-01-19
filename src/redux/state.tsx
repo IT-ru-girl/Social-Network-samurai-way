@@ -14,6 +14,7 @@ export type ArrayMessagesType2 = {
     message: string
 }
 export type SidebarType = {}
+
 export type PostsType = {
     posts: Array<ArrayPostsType2>
     newPostText: string
@@ -22,7 +23,7 @@ export type PostsType = {
 export type DialogsAndMesType = {
     dialogs: Array<ArrayDialogsType2>
     messages: Array<ArrayMessagesType2>
-
+    newMessageBody:string
 }
 
 export type DataPropsType = {
@@ -47,20 +48,15 @@ export type StoreType = {
 }
 
 
- export type  ActionType = AddPostActionType | ChangeNewTextActionType | AddMessageActionTYpe
- type AddPostActionType = ReturnType<typeof addPostAC>
-//      {
-//     type: 'ADD-POST'
-//     postMessage: string
-// }
+ export type  ActionType = AddPostActionType | ChangeNewTextActionType | AddMessageActionTYpe | UpdateNewMessageAC
 
- type ChangeNewTextActionType = ReturnType<typeof postChangeAC>
-//  {
-//     type: 'UPDATE-NEW-POST-TEXT'
-//     newText: string
-// }
+ type AddPostActionType = ReturnType<typeof addPostAC>
+
+type ChangeNewTextActionType = ReturnType<typeof postChangeAC>
 
 type AddMessageActionTYpe = ReturnType<typeof addMesAC >
+
+type UpdateNewMessageAC =ReturnType<typeof updateMesAC>
 
 export const addPostAC = (postMessage: string) => {
     return {
@@ -82,6 +78,14 @@ export const addMesAC = (newDialogsMessage:string) => {
         newDialogsMessage: newDialogsMessage
     } as const
 }
+
+export const updateMesAC = (newMessageValue:string) => {
+    return {
+        type: 'UPDATE-NEW-MESSAGE-TEXT',
+        newMessageValue:newMessageValue
+    } as const
+}
+// данные нового сообщения должны уходить из компоненты, как аргумент функции креэйтора
 
 
 
@@ -112,7 +116,8 @@ const store: StoreType = {
                 {id: 3, message: 'Good'},
                 {id: 4, message: 'and u'},
                 {id: 5, message: 'Bye'},
-            ]
+            ],
+            newMessageBody: ''
         },
         sidebar: []
 
@@ -149,6 +154,7 @@ const store: StoreType = {
     //     this._state.profilePage.newPostText = newText
     //     this._rerenderEntireTree();
     // },
+    //у нас была отдельная функция, которая отслеживает изменения в поле ввода, передавала ее в стейт и при пуше информация бралась уже из стейта
     getState() {
         return this._state
     },
@@ -167,18 +173,18 @@ const store: StoreType = {
             this._state.profilePage.newPostText = action.newText
             this._rerenderEntireTree();
         } else if (action.type === 'ADD-MESSAGE') {
+            // данные нового сообщения должны уходить из компоненты, как аргумент функции креэйтора
 
-            const newMes: ArrayMessagesType2 = {
-                id: 6,
-                message: action.newDialogsMessage
-            }
-            this._state.dialogsPage.messages.push(newMes);
-            // this._state.dialogsPage.messages = ''
+            let newDialogsMessage: string = this._state.dialogsPage.newMessageBody
+            this._state.dialogsPage.newMessageBody = ''
+            this._state.dialogsPage.messages.push({id: 6, message: newDialogsMessage},)
+            this._rerenderEntireTree();
+        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+            this._state.dialogsPage.newMessageBody = action.newMessageValue
             this._rerenderEntireTree();
         }
+
     }
 
 }
-
-
 export default store;
