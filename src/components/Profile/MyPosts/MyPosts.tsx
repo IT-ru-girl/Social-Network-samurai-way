@@ -3,13 +3,10 @@ import s from './MyPosts.module.css'
 import Post from './Post/Post';
 import {
     ActionType,
-    addPostAC,
-
     ArrayPostsType2,
-
-    postChangeAC,
 } from '../../../redux/state';
 
+import {addPostAC, postChangeAC,} from '../../../redux/profile-reducer'
 type PostsType = {
     posts: Array<ArrayPostsType2>
     postMessage: string
@@ -22,9 +19,6 @@ type PostsType = {
 
 
 const MyPosts = (props: PostsType) => {
-
-
-
 
     let postsElements = props.posts.map(post => {
         return (

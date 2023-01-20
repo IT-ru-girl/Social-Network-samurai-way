@@ -1,3 +1,7 @@
+import profileReducer, {addPostAC, postChangeAC} from './profile-reducer';
+import dialogsReducer, {addMesAC, updateMesAC} from './dialogs-reducer';
+import sidebarReducer from './sidebar-reducer';
+
 export type ArrayPostsType2 = {
     id: number,
     message: string,
@@ -58,33 +62,7 @@ type AddMessageActionTYpe = ReturnType<typeof addMesAC >
 
 type UpdateNewMessageAC =ReturnType<typeof updateMesAC>
 
-export const addPostAC = (postMessage: string) => {
-    return {
-        type: 'ADD-POST',
-        postMessage: postMessage
-    } as const
-}
 
-export const postChangeAC = (text: string) => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT',
-        newText: text
-    } as const
-}
-
-export const addMesAC = (newDialogsMessage:string) => {
-    return {
-        type: 'ADD-MESSAGE',
-        newDialogsMessage: newDialogsMessage
-    } as const
-}
-
-export const updateMesAC = (newMessageValue:string) => {
-    return {
-        type: 'UPDATE-NEW-MESSAGE-TEXT',
-        newMessageValue:newMessageValue
-    } as const
-}
 // данные нового сообщения должны уходить из компоненты, как аргумент функции креэйтора
 
 
@@ -94,11 +72,8 @@ const store: StoreType = {
         profilePage: {
             posts: [
                 {id: 1, message: 'Hi', likesCount: 10},
-                {id: 2, message: 'How a u', likesCount: 16},
-                {id: 3, message: 'Good', likesCount: 18},
-                {id: 4, message: 'and u', likesCount: 19},
-                {id: 5, message: 'Bye', likesCount: 20},
-            ],
+                {id: 2, message: 'It is my first post', likesCount: 16},
+               ],
             newPostText: 'blabla',
 
         },
@@ -122,67 +97,25 @@ const store: StoreType = {
         sidebar: []
 
     },
-    // addPost(postMessage: string) {
-    //
-    //     const newPost: ArrayPostsType2 = {
-    //         id: 5,
-    //         message: this._state.profilePage.newPostText = postMessage,
-    //         likesCount: 0
-    //     }
-    //     this._state.profilePage.posts.push(newPost);
-    //     this._state.profilePage.newPostText = ''
-    //     this._rerenderEntireTree();
-    //
-    // },
-    // addMessage(newDialogsMessage: string) {
-    //     const newMes: ArrayMessagesType2 = {
-    //         id: 6,
-    //         message:  newDialogsMessage
-    //     }
-    //     this._state.dialogsPage.messages.push(newMes);
-    //     // this._state.dialogsPage.messages = ''
-    //     this._rerenderEntireTree();
-    //
-    // },
+
     _rerenderEntireTree() {
         console.log('state')
     },
     subscribe(observer) {
         this._rerenderEntireTree = observer;
     },
-    // onPostChange(newText) {
-    //     this._state.profilePage.newPostText = newText
-    //     this._rerenderEntireTree();
-    // },
-    //у нас была отдельная функция, которая отслеживает изменения в поле ввода, передавала ее в стейт и при пуше информация бралась уже из стейта
+    //у нас была отдельная функция, которая отслеживает изменения в поле ввода, передавала их в стейт и при пуше информация бралась уже из стейта
     getState() {
         return this._state
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            const newPost: ArrayPostsType2 = {
-                id: 5,
-                message: this._state.profilePage.newPostText = action.postMessage,
-                //this._state.profilePage.newPostText,
-                likesCount: 0
-            }
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = ''
-            this._rerenderEntireTree();
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newText
-            this._rerenderEntireTree();
-        } else if (action.type === 'ADD-MESSAGE') {
-            // данные нового сообщения должны уходить из компоненты, как аргумент функции креэйтора
 
-            let newDialogsMessage: string = this._state.dialogsPage.newMessageBody
-            this._state.dialogsPage.newMessageBody = ''
-            this._state.dialogsPage.messages.push({id: 6, message: newDialogsMessage},)
-            this._rerenderEntireTree();
-        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
-            this._state.dialogsPage.newMessageBody = action.newMessageValue
-            this._rerenderEntireTree();
-        }
+        profileReducer(this._state.profilePage,action)
+        dialogsReducer(this._state.dialogsPage, action)
+        sidebarReducer(this._state.sidebar, action)
+// мы делегировали преобразовали веток стейта редьюсерам
+        this._rerenderEntireTree();
+        // а дальше уведомили 'подписчиков'
 
     }
 

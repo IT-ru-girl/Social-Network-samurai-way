@@ -1,6 +1,7 @@
 import React, {ChangeEvent} from 'react';
 import s from './../Dialogs.module.css'
-import {ActionType, addMesAC, ArrayMessagesType2, ArrayPostsType2, updateMesAC} from '../../../redux/state';
+import {ActionType, ArrayMessagesType2 } from '../../../redux/state';
+import {addMesAC, updateMesAC} from '../../../redux/dialogs-reducer';
 
 
 
@@ -20,7 +21,6 @@ const Message = (props: MessagePropsType) => {
     const  addMes = ()=>{
 
         props.dispatch(addMesAC(newMes))
-
     }
  const onNewMessageChange=(e:ChangeEvent<HTMLTextAreaElement>)=>{
     let newMessageValue = e.target.value
