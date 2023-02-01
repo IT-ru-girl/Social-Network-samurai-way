@@ -37,7 +37,6 @@ const MyPosts = (props: PostsType) => {
     const onPostChange =(event: ChangeEvent<HTMLTextAreaElement>)=>{
       const newPostText = event.currentTarget.value
          props.onPostChange(newPostText)
-
     }
 
     return (

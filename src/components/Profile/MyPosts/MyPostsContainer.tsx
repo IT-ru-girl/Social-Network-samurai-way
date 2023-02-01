@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, { ChangeEvent} from 'react';
 import s from './MyPosts.module.css'
 import Post from './Post/Post';
 import {
@@ -27,13 +27,12 @@ const MyPostsContainer = () => {
 //props: MyPostsContainerType
 
     return (
-        <StoreContext.Consumer>{
-            (store)=> {
+        <StoreContext.Consumer>
+            { (store)=> {
                 let state =  store.getState();
 
                 const  addPost =()=> {
-
-                    store.dispatch(addPostAC(state.dialogsPage.newMessageBody))
+                    store.dispatch(addPostAC(state.profilePage.newPostText))
                 }
                 const onPostChange =(text:string)=>{
 

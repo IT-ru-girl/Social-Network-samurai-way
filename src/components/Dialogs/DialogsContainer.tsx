@@ -28,8 +28,8 @@ const DialogsContainer = () => {
     // let newMessageBody = state.newMessageBody
 
     return (
-        <StoreContext.Consumer>{
-                (store)=>{
+        <StoreContext.Consumer>
+            { (store)=>{
                     let state = store.getState().dialogsPage
                     const addMes = () => {
                         store.dispatch(addMesAC(state.newMessageBody))

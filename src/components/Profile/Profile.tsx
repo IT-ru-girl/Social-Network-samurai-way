@@ -5,16 +5,16 @@ import ProfileInfo from './ProfileInfo/ProfleInfo';
 import {ActionType, ArrayPostsType2, StoreType,} from '../../redux/store';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
 
-type PostsType = {
-    // store: StoreType
-    // posts: Array<ArrayPostsType2>
-    // dispatch: (action: ActionType) => void
-    // addPostCallback: (postMessage: string)=> void
-    // newPostText: string
-    // onPostChange: (newPostText: string)=> void
-}
-const Profile = (props: PostsType) => {
-
+// type PostsType = {
+//     // store: StoreType
+//     // posts: Array<ArrayPostsType2>
+//     // dispatch: (action: ActionType) => void
+//     // addPostCallback: (postMessage: string)=> void
+//     // newPostText: string
+//     // onPostChange: (newPostText: string)=> void
+// }
+const Profile = () => {
+//props: PostsType
 
     return (
         <div >
