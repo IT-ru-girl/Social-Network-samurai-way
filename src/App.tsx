@@ -8,17 +8,18 @@ import {BrowserRouter, Route,} from 'react-router-dom';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
-import {ActionType, StoreType,} from './redux/state';
+import {ActionType, StoreType,} from './redux/store';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 
-type AppType = {
-    store: StoreType
-    dispatch : (action: ActionType)=> void
-}
+// type AppType = {
+//     store: StoreType
+//     dispatch : (action: ActionType)=> void
+// }
 
-function App(props: AppType) {
+function App() {
 
-    const state = props.store.getState();
+    // const state = props.store.getState();
 
 
     return (
@@ -30,17 +31,22 @@ function App(props: AppType) {
                 {/*<Route path="/profile" component={Profile}/>*/}
                 <div className="app-wrapper-content">
                     <Route path="/dialogs"
-                           render={() => <Dialogs posts={state.profilePage.posts} dialogs={state.dialogsPage.dialogs}
-                                                  messages={state.dialogsPage.messages}
+                           render={() => <DialogsContainer
+                               // store={props.store}
+                               // posts={state.profilePage.posts}
+                               // dialogs={state.dialogsPage.dialogs}
+                               //                    messages={state.dialogsPage.messages}
                                                   // addMessage={props.store.addMessage.bind(props.store)
-                                                  newMessageBody={state.dialogsPage.newMessageBody}
-                                                  dispatch ={props.dispatch}
+                                                  // newMessageBody={state.dialogsPage.newMessageBody}
+                                                  // dispatch ={props.dispatch}
                            />}/>
 
-                    <Route path="/profile/" render={() => <Profile postMessage={state.profilePage.newPostText}
-                                                                   posts={state.profilePage.posts}
+                    <Route path="/profile/" render={() => <Profile
+                        // store={props.store}
+                                                                   // newPostText={state.profilePage.newPostText}
+                                                                   // posts={state.profilePage.posts}
                                                                    // addPostCallback={props.store.addPost.bind(props.store)}
-                                                            dispatch ={props.dispatch}
+                                                            // dispatch ={props.dispatch}
                                                                    />}/>
 
                     <Route path="/news" component={News}/>

@@ -1,13 +1,22 @@
 import React from 'react';
-import {ActionType, ArrayPostsType2, DataPropsType, PostsType} from './state';
+import {ActionType, ArrayPostsType2, DataPropsType, PostsType} from './store';
 
-const ProfileReducer = (state: PostsType , action: ActionType) => {
+
+
+const initialState: PostsType ={
+    posts: [
+        {id: 1, message: 'Hi', likesCount: 10},
+        {id: 2, message: 'It is my first post', likesCount: 16},
+    ],
+    newPostText: 'blabla',
+}
+const ProfileReducer = (state: PostsType = initialState, action: ActionType) => {
     switch (action.type){
         case 'ADD-POST':{
 
             const newPost: ArrayPostsType2 = {
                 id: 3,
-                message: state.newPostText = action.postMessage,
+                message: state.newPostText = action.newPostText,
                 //this._state.profilePage.newPostText, убираем этот профайлпэйдж т к получается что главный стейт это и есть он
                 likesCount: 0
             }
@@ -26,10 +35,10 @@ const ProfileReducer = (state: PostsType , action: ActionType) => {
 
 }
 
-export const addPostAC = (postMessage: string) => {
+export const addPostAC = (newPostText: string) => {
     return {
         type: 'ADD-POST',
-        postMessage: postMessage
+        newPostText: newPostText
     } as const
 }
 

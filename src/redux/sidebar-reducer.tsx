@@ -1,12 +1,12 @@
 import React from 'react';
-import {ActionType} from './state';
+import {ActionType, SidebarType} from './store';
 
 
 
+const initialState: SidebarType = {}
 
 
-
-const SidebarReducer = (state: any, action: ActionType) => {
+const SidebarReducer = (state: SidebarType = initialState, action: ActionType) => {
     return (
         <div>
 

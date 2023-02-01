@@ -1,10 +1,28 @@
 import React from 'react';
-import {ActionType, ArrayPostsType2, DialogsAndMesType} from './state';
+import {ActionType, ArrayPostsType2, DialogsAndMesType} from './store';
 
 
 
 
-const DialogsReducer = (state: DialogsAndMesType, action: ActionType) => {
+const initialState: DialogsAndMesType ={
+    dialogs: [
+        {id: 1, name: 'Ksu'},
+        {id: 2, name: 'Kate'},
+        {id: 3, name: 'Dima'},
+        {id: 4, name: 'Masha'},
+        {id: 5, name: 'Sasha'},
+    ],
+    messages: [
+        {id: 1, message: 'Hi'},
+        {id: 2, message: 'How a u'},
+        {id: 3, message: 'Good'},
+        {id: 4, message: 'and u'},
+        {id: 5, message: 'Bye'},
+    ],
+    newMessageBody: ''
+}
+
+const DialogsReducer = (state: DialogsAndMesType =initialState, action: ActionType) => {
 
 
     switch (action.type){
