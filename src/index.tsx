@@ -5,8 +5,12 @@ import App from './App';
 
 import {BrowserRouter} from 'react-router-dom';
 
-import store from './redux/store';
-import StoreContext, {Provider} from './StoreContext';
+import {
+
+} from './redux/store';
+import {Provider} from 'react-redux';
+import store from './redux/redux-store';
+// import StoreContext, {Provider} from './StoreContext';
 
  const rerenderEntireTree=()=>{
     ReactDOM.render(
@@ -24,4 +28,7 @@ import StoreContext, {Provider} from './StoreContext';
 
 rerenderEntireTree();
 
-store.subscribe(rerenderEntireTree);
+store.subscribe(()=>{
+    console.log(store.getState())
+});
+// c 47 выпуска нам эта подписка не нужна, мы хотим чтобы перерисовывалась та часть только которая изменяется а не все дерево

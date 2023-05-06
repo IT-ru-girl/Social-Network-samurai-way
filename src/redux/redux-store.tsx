@@ -18,8 +18,9 @@ let reducers = combineReducers ({
 export type ReducersType = ReturnType<typeof reducers>
 
 
-export const store= createStore(reducers);
+export let store= createStore(reducers);
 
+console.log(store.getState());
 // export type StoreType= typeof store
 
 export default store

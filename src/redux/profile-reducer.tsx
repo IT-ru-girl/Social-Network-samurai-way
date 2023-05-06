@@ -10,7 +10,7 @@ const initialState: PostsType ={
     ],
     newPostText: 'blabla',
 }
-const ProfileReducer = (state: PostsType = initialState, action: ActionType) => {
+const profileReducer = (state: PostsType = initialState, action: ActionType) => {
     switch (action.type){
         case 'ADD-POST':{
 
@@ -19,14 +19,26 @@ const ProfileReducer = (state: PostsType = initialState, action: ActionType) => 
                 message: state.newPostText = action.newPostText,
                 //this._state.profilePage.newPostText, убираем этот профайлпэйдж т к получается что главный стейт это и есть он
                 likesCount: 0
-            }
-            state.posts.push(newPost);
-            state.newPostText = ''
-            return state
+            };
+            // let newState ={...state}
+            // newState.posts= [...state.posts]
+            //  state.posts.push(newPost);
+            // newState.posts.push(newPost)
+            //  state.newPostText = ''
+            // newState.newPostText=''
+
+            return {...state,
+                posts:[...state.posts,newPost],
+                newPostText:''}
+
 //вообще после каждого кейса надо делать break , иначе мы будем проваливаться дальше, но мы будем просто возвращать стейт , когда посреди функции ретурн , функция перестает дальше работть, просто ретурна код нечитабелен
         }
             case 'UPDATE-NEW-POST-TEXT':{
-                return state.newPostText = action.newText
+
+                // let newState ={...state}
+                // newState.newPostText=action.newText
+                return {...state,newPostText: action.newText}
+                // state.newPostText = action.newText
             }
 
         default: return state
@@ -49,4 +61,4 @@ export const postChangeAC = (text: string) => {
     } as const
 }
 
-export default ProfileReducer;
+export default profileReducer;
