@@ -1,20 +1,29 @@
 import React from 'react';
-import {ActionType, ArrayPostsType2, DataPropsType, PostsType} from './store';
+import {ActionType, AllPostsType, DataPropsType, } from './store';
 
 
 
-const initialState: PostsType ={
+
+export type PostType = {
+    id: number,
+    message: string,
+    likesCount: number
+}
+
+const initialState: AllPostsType ={
     posts: [
         {id: 1, message: 'Hi', likesCount: 10},
         {id: 2, message: 'It is my first post', likesCount: 16},
-    ],
+    ] as Array<PostType>,
     newPostText: 'blabla',
 }
-const profileReducer = (state: PostsType = initialState, action: ActionType) => {
+
+export type InitialStateType = typeof initialState
+const profileReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
     switch (action.type){
         case 'ADD-POST':{
 
-            const newPost: ArrayPostsType2 = {
+            const newPost: PostType = {
                 id: 3,
                 message: state.newPostText = action.newPostText,
                 //this._state.profilePage.newPostText, убираем этот профайлпэйдж т к получается что главный стейт это и есть он

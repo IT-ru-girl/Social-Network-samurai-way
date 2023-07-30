@@ -4,14 +4,15 @@ import s from './Dialogs.module.css'
 import DialogItem from './DialogItem/DialogsItem';
 import Message from './Message/Message';
 import {
-    ActionType,
-    ArrayDialogsType2,
-    ArrayMessagesType2,
-    ArrayPostsType2,
+    // ActionType,
+    // ArrayDialogsType2,
+    // ArrayMessagesType2,
+    // ArrayPostsType2,
     DialogsAndMesType,
-    StoreType,
+    // StoreType,
 } from '../../redux/store';
 import {addMesAC, updateMesAC} from '../../redux/dialogs-reducer';
+import {DialogsFuncType} from './DialogsContainer';
 
 export type DialogsType = {
     // store: StoreType
@@ -24,7 +25,7 @@ export type DialogsType = {
     updateNewMessageBody: (newMessageValue:string) => void
     dialogsPage: DialogsAndMesType
 }
-const Dialogs = (props: DialogsType) => {
+const Dialogs = (props: DialogsFuncType) => {
 
     let state=props.dialogsPage
 

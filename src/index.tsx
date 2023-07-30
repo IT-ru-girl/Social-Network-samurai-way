@@ -17,7 +17,8 @@ import store from './redux/redux-store';
         <BrowserRouter>
             <Provider store={store}>
                 <App
-                    // store={store} dispatch={store.dispatch.bind(store)}
+                    store={store}
+                    // dispatch={store.dispatch.bind(store)}
                 />
             </Provider>
 

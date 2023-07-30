@@ -2,11 +2,12 @@ import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css'
 import Post from './Post/Post';
 import {
-    ActionType,
-    ArrayPostsType2, StoreType,
+    ActionType, ArrayPostsType2,
+
 } from '../../../redux/store';
 
 import {addPostAC, postChangeAC,} from '../../../redux/profile-reducer'
+import {PostsFuncType} from './MyPostsContainer';
 type PostsType = {
     // store: StoreType
     posts: Array<ArrayPostsType2>
@@ -19,7 +20,7 @@ type PostsType = {
 
 
 
-const MyPosts = (props: PostsType) => {
+const MyPosts = (props: PostsFuncType) => {
 
 
     let postsElements = props.posts.map(post => {

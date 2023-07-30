@@ -2,25 +2,29 @@ import {combineReducers, createStore} from 'redux';
 import profileReducer from './profile-reducer';
 import dialogsReducer from './dialogs-reducer';
 import sidebarReducer from './sidebar-reducer';
-import {StoreType} from './store';
+
+import usersReducer from './users-reducer';
 
 
 
 
-let reducers = combineReducers ({
+export const rootReducer = combineReducers ({
     profilePage: profileReducer,
     //  в стейте был profilePage, тперь он переокчевал сюда и за него отвечает его собсвтенный редьюсер
     dialogsPage: dialogsReducer,
-    sidebar: sidebarReducer
+    sidebar: sidebarReducer,
+    users: usersReducer,
 })
 
+//если в тайпоф подсунунть обьект значит он протипизирует объект рутредьюсер
+export type ReducersType = ReturnType<typeof rootReducer>
+//дай мне вовзращаемый тип и возьми вот отсюда из галочек, typeof типизирует функцию, а ф что-то возвращает
+export type StoreType = typeof store
 
-export type ReducersType = ReturnType<typeof reducers>
+export const store= createStore(rootReducer);
 
-
-export let store= createStore(reducers);
-
-console.log(store.getState());
-// export type StoreType= typeof store
-
+// console.log(store.getState());
+// // export type StoreType= typeof store
+// // @ts-ignore
+// window.store= store
 export default store

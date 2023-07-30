@@ -8,16 +8,19 @@ import {BrowserRouter, Route,} from 'react-router-dom';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
-import {ActionType, StoreType,} from './redux/store';
+import {ActionType,} from './redux/store';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
+import Users from './components/Users/Users';
+import UsersContainer from './components/Users/UsersContainer';
+import {StoreType} from './redux/redux-store';
 
 
-// type AppType = {
-//     store: StoreType
-//     dispatch : (action: ActionType)=> void
-// }
+type AppType = {
+    store: StoreType
+    // dispatch : (action: ActionType)=> void
+}
 
-function App() {
+function App(props: AppType) {
 
     // const state = props.store.getState();
 
@@ -49,6 +52,7 @@ function App() {
                                                             // dispatch ={props.dispatch}
                                                                    />}/>
 
+                    <Route path="/users" render={()=> <UsersContainer/>}/>
                     <Route path="/news" component={News}/>
                     <Route path="/music" component={Music}/>
                     <Route path="/settings" component={Settings}/>

@@ -1,8 +1,16 @@
 import React from 'react';
-import {ActionType, ArrayPostsType2, DialogsAndMesType} from './store';
+import {ActionType, } from './store';
 
+export type DialogsType2 = {
+    id: number,
+    name: string
+}
 
-const initialState: DialogsAndMesType = {
+export type MessagesType2 = {
+    id: number,
+    message: string
+}
+const initialState = {
     dialogs: [
         {id: 1, name: 'Ksu'},
         {id: 2, name: 'Kate'},
@@ -10,18 +18,21 @@ const initialState: DialogsAndMesType = {
         {id: 4, name: 'Masha'},
         {id: 5, name: 'Sasha'},
         {id: 6, name: 'Dasha'},
-    ],
+    ] as Array<DialogsType2>,
     messages: [
         {id: 1, message: 'Hi'},
         {id: 2, message: 'How a u'},
         {id: 3, message: 'Good'},
         {id: 4, message: 'and u'},
         {id: 5, message: 'Bye'},
-    ],
+    ] as Array<MessagesType2>,
     newMessageBody: ''
 }
+export type InitialStateType = typeof initialState
 
-const DialogsReducer = (state: DialogsAndMesType = initialState, action: ActionType) => {
+
+
+const DialogsReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
     // let newState = {...state,
     // messages: [...state.messages]}
     // let newState;

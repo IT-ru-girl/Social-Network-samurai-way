@@ -2,11 +2,20 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
 
 
-import {ActionType, ArrayDialogsType2, ArrayMessagesType2, ArrayPostsType2, StoreType,} from '../../redux/store';
+import {
+    ActionType,
+    // ArrayDialogsType2,
+    // ArrayMessagesType2,
+    // ArrayPostsType2,
+    DialogsAndMesType,
+
+} from '../../redux/store';
 import {addMesAC, updateMesAC} from '../../redux/dialogs-reducer';
 import Dialogs, {DialogsType} from './Dialogs';
 // import StoreContext from '../../StoreContext';
 import {connect} from 'react-redux';
+import {ReducersType} from '../../redux/redux-store';
+import { Dispatch } from 'redux';
 
 // export type DialogsContainerType = {
 //     store: StoreType
@@ -50,13 +59,22 @@ import {connect} from 'react-redux';
 //         </StoreContext.Consumer>
 //     );
 // };
-
-let mapStateToProps =(state: DialogsType)=>{
+type MapStateToProps ={
+    dialogsPage:DialogsAndMesType
+}
+let mapStateToProps =(state: ReducersType): MapStateToProps=>{
     return {
 dialogsPage: state.dialogsPage
     }
 }
-let mapDispatchToProps =(dispatch: (action: ActionType) => void)=>{
+
+type MapDispatchToProps={
+    updateNewMessageBody: (newMessageValue: string)=>void,
+    sendMessage: (newMessageBody:string)=> void
+}
+
+export type DialogsFuncType = MapStateToProps & MapDispatchToProps
+let mapDispatchToProps =(dispatch:Dispatch): MapDispatchToProps=>{
     return {
         updateNewMessageBody:(newMessageValue: string)=>{dispatch(updateMesAC(newMessageValue))},
         sendMessage:(newMessageBody:string)=>{dispatch(addMesAC(newMessageBody))}
