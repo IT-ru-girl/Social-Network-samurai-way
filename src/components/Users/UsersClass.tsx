@@ -61,6 +61,13 @@ export type UserItem={
 render(): React.ReactNode {
  return <div>
   {/*<button onClick={this.getUsers} >GETUSERS</button>*/}
+     <div>
+         <span>1</span>
+         <span>2</span>
+         <span>3</span>
+         <span>4</span>
+         <span>5</span>
+     </div>
   <h3>Users</h3>
   {this.props.users.map((u:UserItem) => <div key={u.id}>
                     <span>
