@@ -1,31 +1,32 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import Users from './Users';
+
 import {ActionType } from '../../redux/store';
-import {followAC, InitialStateType, setUserAC, unfollowAC, UserType} from '../../redux/users-reducer';
+import {followAC, InitialStateType, setUserAC, unfollowAC, } from '../../redux/users-reducer';
 import {ReducersType} from '../../redux/redux-store';
 import { Dispatch } from 'redux';
+import {UserItem, Users} from './UsersClass';
 
 type MapStateToPropsType = {
-    usersPage:InitialStateType
+    users:UserItem[]
 }
-
-let mapStateToProps = (state: ReducersType):MapStateToPropsType => {
+type MapDispatchToProps={
+    follow: (userId: number)=>void,
+    unfollow: (userId: number)=> void,
+    setUsers: (users: UserItem[])=> void
+}
+const mapStateToProps = (state: ReducersType):MapStateToPropsType => {
     //здесь в типизации стейта должен быть тип всего приложения!!
     return {
-        usersPage: state.users
+        users: state.usersPage.users
     }
     // msttate to props как раз возращает частичку стейта usersPage  и типизировать нужно ее, а принимает весь стейт в себя
 }
 
-type MapDispatchToProps={
-    follow: (userId: number)=>void,
-    unfollow: (userId: number)=> void,
-    setUser: (users: UserType[])=> void
-}
+
 //мы оборачиваем Users контейнерной компонентой и эти колбэки попадут через пропсы в компоненту users
 
-export type UsersPropsType = MapStateToPropsType & MapDispatchToProps
+// export type UsersPropsType = MapStateToPropsType & MapDispatchToProps
 
 
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
@@ -37,7 +38,7 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
         unfollow: (userId: number) => {
             dispatch(unfollowAC(userId))
         },
-        setUser: (users: UserType[]) => {
+        setUsers: (users: UserItem[]) => {
             dispatch(setUserAC(users))
         }
 // ф диспатчит пользователей которых ей передали в экшн криэйтор формирует экшн с этими пользователями  и диспатчит в ощий стор

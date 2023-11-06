@@ -1,5 +1,6 @@
 import React from 'react';
-import {ActionType, LocationType, } from './store';
+import {ActionType,  } from './store';
+import {UserItem} from '../components/Users/UsersClass';
 
 
 
@@ -29,27 +30,33 @@ import {ActionType, LocationType, } from './store';
     //     },
     //
 
- export type UserType = {
-    id: number,
-    photoUrl:string,
-    followed: boolean,
-    fullName: string,
-    status: string,
-    location: LocationType
-}
+//  export type UserType = {
+//     id: number,
+//     photos:string,
+//     followed: boolean,
+//     name: string,
+//     status: string,
+//     location: LocationType
+// }
 const initialState :InitialStateType= {
     users: []}
 
+ // export type InitialStateType = {
+ //    users:UserType[]
+ // }
  export type InitialStateType = {
-    users:UserType[]
+    users:UserItem[]
  }
+ //меняем типизацию на ту, которая приходит с сервака а не наша рукописная UserType
+
+
  //как я поняла это типизиция той части стейта , в которую включены юзеры, usersPage
 const usersReducer = (state:InitialStateType  =initialState, action: ActionType):InitialStateType => {
     //важно типизировато то что редьюсер принимает и то что вовзращает , принимает он стейт юзеров и возвращет стет такого же типа, типизация должна совпадать
     switch (action.type) {
         case 'FOLLOW': {
 
-            return {...state, users: state.users.map(u=> u.id === action.userId ? {...u,followed: true}: u)}
+            return {...state, users: state.users.map((u:UserItem)=> u.id === action.userId ? {...u,followed: true}: u)}
         }
         case 'UNFOLLOW' : {
 
@@ -79,7 +86,7 @@ export const unfollowAC = (userid: number) => {
     } as const
 }
 
-export const setUserAC = (users: UserType[]) => {
+export const setUserAC = (users: UserItem[]) => {
     return {
         type: 'SETUSER',
         users: users

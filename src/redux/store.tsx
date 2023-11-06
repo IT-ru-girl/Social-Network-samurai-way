@@ -1,5 +1,5 @@
 import profileReducer, {addPostAC, postChangeAC} from './profile-reducer';
-import dialogsReducer, {addMesAC, updateMesAC} from './dialogs-reducer';
+import dialogsReducer, {addMesAC, DialogsAndMesType, updateMesAC} from './dialogs-reducer';
 import sidebarReducer from './sidebar-reducer';
 import usersReducer, {followAC, InitialStateType, setUserAC, unfollowAC} from './users-reducer';
 import {StoreType} from './redux-store';
@@ -31,11 +31,11 @@ export type AllPostsType = {
     newPostText: string
 }
 
-export type DialogsAndMesType = {
-    dialogs: Array<ArrayDialogsType2>
-    messages: Array<ArrayMessagesType2>
-    newMessageBody: string
-}
+// export type DialogsAndMesType = {
+//     dialogs: Array<ArrayDialogsType2>
+//     messages: Array<ArrayMessagesType2>
+//     newMessageBody: string
+// }
 
 export type DataPropsType = {
     profilePage: AllPostsType,
@@ -47,19 +47,19 @@ export type DataPropsType = {
 //     users: UserType[],
 // }
 
- type UserType = {
-    id: number,
-    photoUrl:string,
-    followed: boolean,
-    fullName: string,
-    status: string,
-    location: LocationType
-}
+//  type UserType = {
+//     id: number,
+//     photoUrl:string,
+//     followed: boolean,
+//     name: string,
+//     status: string,
+//     location: LocationType
+// }
 
- export type LocationType = {
-    city: string,
-    country: string
-}
+//  export type LocationType = {
+//     city: string,
+//     country: string
+// }
 // export type StateType = {
 //     state: DataPropsType
 // }

@@ -1,6 +1,12 @@
 import React from 'react';
-import {ActionType, } from './store';
+import {ActionType, ArrayDialogsType2, ArrayMessagesType2,} from './store';
 
+
+export type DialogsAndMesType = {
+    dialogs: Array<ArrayDialogsType2>
+    messages: Array<ArrayMessagesType2>
+    newMessageBody: string
+}
 export type DialogsType2 = {
     id: number,
     name: string

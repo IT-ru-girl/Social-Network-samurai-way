@@ -13,7 +13,7 @@ export const rootReducer = combineReducers ({
     //  в стейте был profilePage, тперь он переокчевал сюда и за него отвечает его собсвтенный редьюсер
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer,
-    users: usersReducer,
+    usersPage: usersReducer,
 })
 
 //если в тайпоф подсунунть обьект значит он протипизирует объект рутредьюсер

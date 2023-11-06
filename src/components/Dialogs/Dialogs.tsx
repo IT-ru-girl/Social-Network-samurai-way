@@ -4,14 +4,15 @@ import s from './Dialogs.module.css'
 import DialogItem from './DialogItem/DialogsItem';
 import Message from './Message/Message';
 import {
+    ArrayDialogsType2
     // ActionType,
     // ArrayDialogsType2,
     // ArrayMessagesType2,
     // ArrayPostsType2,
-    DialogsAndMesType,
+
     // StoreType,
 } from '../../redux/store';
-import {addMesAC, updateMesAC} from '../../redux/dialogs-reducer';
+import {addMesAC, DialogsAndMesType, updateMesAC} from '../../redux/dialogs-reducer';
 import {DialogsFuncType} from './DialogsContainer';
 
 export type DialogsType = {

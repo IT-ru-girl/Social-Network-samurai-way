@@ -7,10 +7,10 @@ import {
     // ArrayDialogsType2,
     // ArrayMessagesType2,
     // ArrayPostsType2,
-    DialogsAndMesType,
+
 
 } from '../../redux/store';
-import {addMesAC, updateMesAC} from '../../redux/dialogs-reducer';
+import {addMesAC, DialogsAndMesType, updateMesAC} from '../../redux/dialogs-reducer';
 import Dialogs, {DialogsType} from './Dialogs';
 // import StoreContext from '../../StoreContext';
 import {connect} from 'react-redux';
