@@ -5,7 +5,8 @@ import {connect} from 'react-redux';
 import {followAC, setCurrentPageAC, setTotalUsersCountAC, setUserAC, unfollowAC,} from '../../redux/users-reducer';
 import {ReducersType} from '../../redux/redux-store';
 import { Dispatch } from 'redux';
-import {UserItem, Users} from './Users';
+import {UserItem, Users} from './UsersClass';
+
 
 type MapStateToPropsType = {
     users:UserItem[],
