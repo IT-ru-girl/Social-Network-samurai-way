@@ -1,24 +1,32 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {ActionType } from '../../redux/store';
-import {followAC, InitialStateType, setUserAC, unfollowAC, } from '../../redux/users-reducer';
+
+import {followAC, setCurrentPageAC, setTotalUsersCountAC, setUserAC, unfollowAC,} from '../../redux/users-reducer';
 import {ReducersType} from '../../redux/redux-store';
 import { Dispatch } from 'redux';
-import {UserItem, Users} from './UsersClass';
+import {UserItem, Users} from './Users';
 
 type MapStateToPropsType = {
-    users:UserItem[]
+    users:UserItem[],
+    pageSize:number,
+    totalUsersCount: number,
+    currentPage:number
 }
 type MapDispatchToProps={
     follow: (userId: number)=>void,
     unfollow: (userId: number)=> void,
     setUsers: (users: UserItem[])=> void
+    setCurrentPage:(pageNumber: number)=> void
+    setTotalUsersCount:(totalCount: number)=> void
 }
 const mapStateToProps = (state: ReducersType):MapStateToPropsType => {
     //здесь в типизации стейта должен быть тип всего приложения!!
     return {
-        users: state.usersPage.users
+        users: state.usersPage.users,
+        pageSize: state.usersPage.pageSize,
+        totalUsersCount: state.usersPage.totalUsersCount,
+        currentPage: state.usersPage.currentPage
     }
     // msttate to props как раз возращает частичку стейта usersPage  и типизировать нужно ее, а принимает весь стейт в себя
 }
@@ -40,6 +48,12 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
         },
         setUsers: (users: UserItem[]) => {
             dispatch(setUserAC(users))
+        },
+        setCurrentPage:(pageNumber: number)=>{
+            dispatch(setCurrentPageAC(pageNumber))
+        },
+        setTotalUsersCount:(totalCount: number)=>{
+            dispatch(setTotalUsersCountAC(totalCount))
         }
 // ф диспатчит пользователей которых ей передали в экшн криэйтор формирует экшн с этими пользователями  и диспатчит в ощий стор
     }

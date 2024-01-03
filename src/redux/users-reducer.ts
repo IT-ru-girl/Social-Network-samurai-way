@@ -1,6 +1,6 @@
 import React from 'react';
 import {ActionType,  } from './store';
-import {UserItem} from '../components/Users/UsersClass';
+import {UserItem} from '../components/Users/Users';
 
 
 
@@ -39,13 +39,20 @@ import {UserItem} from '../components/Users/UsersClass';
 //     location: LocationType
 // }
 const initialState :InitialStateType= {
-    users: []}
+    users: [],
+    pageSize:5,
+    totalUsersCount: 0,
+    currentPage:2
+}
 
  // export type InitialStateType = {
  //    users:UserType[]
  // }
  export type InitialStateType = {
-    users:UserItem[]
+    users:UserItem[],
+     pageSize:number,
+     totalUsersCount: number,
+     currentPage:number
  }
  //меняем типизацию на ту, которая приходит с сервака а не наша рукописная UserType
 
@@ -64,7 +71,13 @@ const usersReducer = (state:InitialStateType  =initialState, action: ActionType)
         }
         case 'SETUSER':{
             // return {...state, users: action.users} // взять пльзователей которые были и перезатереть теми, которые пришли
-            return {...state, users: [...state.users, ...action.users]} // склеиваем 2 массива , те которые были и те которые пришли
+            return {...state, users: [...action.users]} // склеиваем 2 массива , те //которые были и те которые пришли
+        }
+        case 'CURRENT_PAGE':{
+            return {...state, currentPage: action.currentPage}
+        }
+        case 'TOTAL_USERS_COUNT':{
+            return {...state, totalUsersCount: action.totalCount}
         }
         default:
             return state
@@ -90,6 +103,18 @@ export const setUserAC = (users: UserItem[]) => {
     return {
         type: 'SETUSER',
         users: users
+    } as const
+}
+export const setCurrentPageAC = (currentPage: number) => {
+    return {
+        type: 'CURRENT_PAGE',
+        currentPage
+    } as const
+}
+export const setTotalUsersCountAC = (totalCount: number) => {
+    return {
+        type: 'TOTAL_USERS_COUNT',
+        totalCount
     } as const
 }
 

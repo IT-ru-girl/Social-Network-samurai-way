@@ -1,16 +1,23 @@
 import profileReducer, {addPostAC, postChangeAC} from './profile-reducer';
 import dialogsReducer, {addMesAC, DialogsAndMesType, updateMesAC} from './dialogs-reducer';
 import sidebarReducer from './sidebar-reducer';
-import usersReducer, {followAC, InitialStateType, setUserAC, unfollowAC} from './users-reducer';
+import usersReducer, {
+    followAC,
+    InitialStateType,
+    setCurrentPageAC,
+    setTotalUsersCountAC,
+    setUserAC,
+    unfollowAC
+} from './users-reducer';
 import {StoreType} from './redux-store';
 
- type PostType = {
+type PostType = {
     id: number,
     message: string,
     likesCount: number
 }
 
-  export type ArrayDialogsType2 = {
+export type ArrayDialogsType2 = {
     id: number,
     name: string
 }
@@ -20,7 +27,7 @@ export type ArrayPostsType2 = {
     likesCount: number
 }
 
-  export type ArrayMessagesType2 = {
+export type ArrayMessagesType2 = {
     id: number,
     message: string
 }
@@ -84,6 +91,8 @@ export type  ActionType =
     | FollowActionType
     | UnFollowActionType
     | SetUserActionType
+    | SetCurrentActionType
+    | SetTotalUsersActionType
 
 type AddPostActionType = ReturnType<typeof addPostAC>
 
@@ -98,6 +107,10 @@ type FollowActionType = ReturnType<typeof followAC>
 type UnFollowActionType = ReturnType<typeof unfollowAC>
 
 type SetUserActionType = ReturnType<typeof setUserAC>
+
+type SetCurrentActionType = ReturnType<typeof setCurrentPageAC>
+
+type SetTotalUsersActionType = ReturnType<typeof setTotalUsersCountAC>
 
 // данные нового сообщения должны уходить из компоненты, как аргумент функции креэйтора
 
